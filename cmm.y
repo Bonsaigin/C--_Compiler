@@ -3,33 +3,22 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <iostream>
-#include <algorithm>
-#include "Absyn.H"
-typedef struct yy_buffer_state *YY_BUFFER_STATE;
-int yyparse(void);
-int yylex(void);
-YY_BUFFER_STATE yy_scan_string(const char *str);
-void yy_delete_buffer(YY_BUFFER_STATE buf);
+#include "Absyn.h"
+#define initialize_lexer cmm_initialize_lexer
+extern int yyparse(void);
+extern int yylex(void);
 int yy_mylinenumber;
-int initialize_lexer(FILE * inp);
-int yywrap(void)
-{
-  return 1;
-}
+extern int initialize_lexer(FILE * inp);
 void yyerror(const char *str)
 {
-  extern char *yytext;
-  fprintf(stderr,"error: line %d: %s at %s\n", 
-    yy_mylinenumber, str, yytext);
+  extern char *cmmtext;
+  fprintf(stderr,"error: line %d: %s at %s\n",
+    yy_mylinenumber + 1, str, cmmtext);
 }
 
-
-
-static Program* YY_RESULT_Program_ = 0;
-Program* pProgram(FILE *inp)
+Program YY_RESULT_Program_ = 0;
+Program pProgram(FILE *inp)
 {
-  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -40,29 +29,10 @@ Program* pProgram(FILE *inp)
     return YY_RESULT_Program_;
   }
 }
-Program* pProgram(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_Program_;
-  }
-}
 
-static Function* YY_RESULT_Function_ = 0;
-Function* pFunction(FILE *inp)
+Function YY_RESULT_Function_ = 0;
+Function pFunction(FILE *inp)
 {
-  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -73,29 +43,10 @@ Function* pFunction(FILE *inp)
     return YY_RESULT_Function_;
   }
 }
-Function* pFunction(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_Function_;
-  }
-}
 
-static Decl* YY_RESULT_Decl_ = 0;
-Decl* pDecl(FILE *inp)
+Decl YY_RESULT_Decl_ = 0;
+Decl pDecl(FILE *inp)
 {
-  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -106,29 +57,10 @@ Decl* pDecl(FILE *inp)
     return YY_RESULT_Decl_;
   }
 }
-Decl* pDecl(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_Decl_;
-  }
-}
 
-static ListFunction* YY_RESULT_ListFunction_ = 0;
-ListFunction* pListFunction(FILE *inp)
+ListFunction YY_RESULT_ListFunction_ = 0;
+ListFunction pListFunction(FILE *inp)
 {
-  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -139,29 +71,10 @@ ListFunction* pListFunction(FILE *inp)
     return YY_RESULT_ListFunction_;
   }
 }
-ListFunction* pListFunction(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListFunction_;
-  }
-}
 
-static ListStm* YY_RESULT_ListStm_ = 0;
-ListStm* pListStm(FILE *inp)
+ListStm YY_RESULT_ListStm_ = 0;
+ListStm pListStm(FILE *inp)
 {
-  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -172,29 +85,10 @@ ListStm* pListStm(FILE *inp)
     return YY_RESULT_ListStm_;
   }
 }
-ListStm* pListStm(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListStm_;
-  }
-}
 
-static ListDecl* YY_RESULT_ListDecl_ = 0;
-ListDecl* pListDecl(FILE *inp)
+ListDecl YY_RESULT_ListDecl_ = 0;
+ListDecl pListDecl(FILE *inp)
 {
-  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -205,29 +99,10 @@ ListDecl* pListDecl(FILE *inp)
     return YY_RESULT_ListDecl_;
   }
 }
-ListDecl* pListDecl(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListDecl_;
-  }
-}
 
-static ListIdent* YY_RESULT_ListIdent_ = 0;
-ListIdent* pListIdent(FILE *inp)
+ListIdent YY_RESULT_ListIdent_ = 0;
+ListIdent pListIdent(FILE *inp)
 {
-  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -238,29 +113,10 @@ ListIdent* pListIdent(FILE *inp)
     return YY_RESULT_ListIdent_;
   }
 }
-ListIdent* pListIdent(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListIdent_;
-  }
-}
 
-static Stm* YY_RESULT_Stm_ = 0;
-Stm* pStm(FILE *inp)
+Stm YY_RESULT_Stm_ = 0;
+Stm pStm(FILE *inp)
 {
-  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -271,29 +127,10 @@ Stm* pStm(FILE *inp)
     return YY_RESULT_Stm_;
   }
 }
-Stm* pStm(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_Stm_;
-  }
-}
 
-static Exp* YY_RESULT_Exp_ = 0;
-Exp* pExp(FILE *inp)
+Exp YY_RESULT_Exp_ = 0;
+Exp pExp(FILE *inp)
 {
-  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -304,29 +141,10 @@ Exp* pExp(FILE *inp)
     return YY_RESULT_Exp_;
   }
 }
-Exp* pExp(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_Exp_;
-  }
-}
 
-static ListExp* YY_RESULT_ListExp_ = 0;
-ListExp* pListExp(FILE *inp)
+ListExp YY_RESULT_ListExp_ = 0;
+ListExp pListExp(FILE *inp)
 {
-  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -337,29 +155,10 @@ ListExp* pListExp(FILE *inp)
     return YY_RESULT_ListExp_;
   }
 }
-ListExp* pListExp(const char *str)
-{
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
-  }
-  else
-  { /* Success */
-    return YY_RESULT_ListExp_;
-  }
-}
 
-static Type* YY_RESULT_Type_ = 0;
-Type* pType(FILE *inp)
+Type YY_RESULT_Type_ = 0;
+Type pType(FILE *inp)
 {
-  yy_mylinenumber = 1;
   initialize_lexer(inp);
   if (yyparse())
   { /* Failure */
@@ -370,26 +169,73 @@ Type* pType(FILE *inp)
     return YY_RESULT_Type_;
   }
 }
-Type* pType(const char *str)
+
+
+ListFunction reverseListFunction(ListFunction l)
 {
-  YY_BUFFER_STATE buf;
-  int result;
-  yy_mylinenumber = 1;
-  initialize_lexer(0);
-  buf = yy_scan_string(str);
-  result = yyparse();
-  yy_delete_buffer(buf);
-  if (result)
-  { /* Failure */
-    return 0;
+  ListFunction prev = 0;
+  ListFunction tmp = 0;
+  while (l)
+  {
+    tmp = l->listfunction_;
+    l->listfunction_ = prev;
+    prev = l;
+    l = tmp;
   }
-  else
-  { /* Success */
-    return YY_RESULT_Type_;
-  }
+  return prev;
 }
-
-
+ListStm reverseListStm(ListStm l)
+{
+  ListStm prev = 0;
+  ListStm tmp = 0;
+  while (l)
+  {
+    tmp = l->liststm_;
+    l->liststm_ = prev;
+    prev = l;
+    l = tmp;
+  }
+  return prev;
+}
+ListDecl reverseListDecl(ListDecl l)
+{
+  ListDecl prev = 0;
+  ListDecl tmp = 0;
+  while (l)
+  {
+    tmp = l->listdecl_;
+    l->listdecl_ = prev;
+    prev = l;
+    l = tmp;
+  }
+  return prev;
+}
+ListIdent reverseListIdent(ListIdent l)
+{
+  ListIdent prev = 0;
+  ListIdent tmp = 0;
+  while (l)
+  {
+    tmp = l->listident_;
+    l->listident_ = prev;
+    prev = l;
+    l = tmp;
+  }
+  return prev;
+}
+ListExp reverseListExp(ListExp l)
+{
+  ListExp prev = 0;
+  ListExp tmp = 0;
+  while (l)
+  {
+    tmp = l->listexp_;
+    l->listexp_ = prev;
+    prev = l;
+    l = tmp;
+  }
+  return prev;
+}
 
 %}
 
@@ -399,38 +245,39 @@ Type* pType(const char *str)
   char char_;
   double double_;
   char* string_;
-  Program* program_;
-  Function* function_;
-  Decl* decl_;
-  ListFunction* listfunction_;
-  ListStm* liststm_;
-  ListDecl* listdecl_;
-  ListIdent* listident_;
-  Stm* stm_;
-  Exp* exp_;
-  ListExp* listexp_;
-  Type* type_;
+  Program program_;
+  Function function_;
+  Decl decl_;
+  ListFunction listfunction_;
+  ListStm liststm_;
+  ListDecl listdecl_;
+  ListIdent listident_;
+  Stm stm_;
+  Exp exp_;
+  ListExp listexp_;
+  Type type_;
+
 }
 
 %token _ERROR_
-%token _SYMB_0    //   ;
-%token _SYMB_1    //   (
-%token _SYMB_2    //   )
-%token _SYMB_3    //   {
-%token _SYMB_4    //   }
-%token _SYMB_5    //   ,
-%token _SYMB_6    //   =
-%token _SYMB_7    //   <
-%token _SYMB_8    //   +
-%token _SYMB_9    //   -
-%token _SYMB_10    //   *
-%token _SYMB_11    //   double
-%token _SYMB_12    //   else
-%token _SYMB_13    //   for
-%token _SYMB_14    //   if
-%token _SYMB_15    //   int
-%token _SYMB_16    //   return
-%token _SYMB_17    //   while
+%token _SYMB_0    /*   ;   */
+%token _SYMB_1    /*   (   */
+%token _SYMB_2    /*   )   */
+%token _SYMB_3    /*   {   */
+%token _SYMB_4    /*   }   */
+%token _SYMB_5    /*   ,   */
+%token _SYMB_6    /*   =   */
+%token _SYMB_7    /*   <   */
+%token _SYMB_8    /*   +   */
+%token _SYMB_9    /*   -   */
+%token _SYMB_10    /*   *   */
+%token _SYMB_11    /*   double   */
+%token _SYMB_12    /*   else   */
+%token _SYMB_13    /*   for   */
+%token _SYMB_14    /*   if   */
+%token _SYMB_15    /*   int   */
+%token _SYMB_16    /*   return   */
+%token _SYMB_17    /*   while   */
 
 %type <program_> Program
 %type <function_> Function
@@ -448,67 +295,67 @@ Type* pType(const char *str)
 %type <listexp_> ListExp
 %type <type_> Type
 
-%start Program
 %token<string_> _STRING_
 %token<int_> _INTEGER_
 %token<double_> _DOUBLE_
 %token<string_> _IDENT_
 
+%start Program
 %%
-Program : ListFunction {  $$ = new Prog($1); YY_RESULT_Program_= $$; } 
+Program : ListFunction { $$ = make_Prog(reverseListFunction($1)); YY_RESULT_Program_= $$; } 
 ;
-Function : Type _IDENT_ _SYMB_0 {  $$ = new Global($1, $2); YY_RESULT_Function_= $$; } 
-  | Type _IDENT_ _SYMB_1 ListDecl _SYMB_2 _SYMB_3 ListStm _SYMB_4 {  std::reverse($4->begin(),$4->end()) ;$$ = new Fun($1, $2, $4, $7); YY_RESULT_Function_= $$; }
+Function : Type _IDENT_ _SYMB_0 { $$ = make_Global($1, $2); YY_RESULT_Function_= $$; } 
+  | Type _IDENT_ _SYMB_1 ListDecl _SYMB_2 _SYMB_3 ListStm _SYMB_4 { $$ = make_Fun($1, $2, $4, reverseListStm($7)); YY_RESULT_Function_= $$; }
 ;
-Decl : Type ListIdent {  std::reverse($2->begin(),$2->end()) ;$$ = new Dec($1, $2); YY_RESULT_Decl_= $$; } 
+Decl : Type ListIdent { $$ = make_Dec($1, $2); YY_RESULT_Decl_= $$; } 
 ;
-ListFunction : /* empty */ {  $$ = new ListFunction(); YY_RESULT_ListFunction_= $$; } 
-  | ListFunction Function {  $1->push_back($2) ; $$ = $1 ; YY_RESULT_ListFunction_= $$; }
+ListFunction : /* empty */ { $$ = 0; YY_RESULT_ListFunction_= $$; } 
+  | ListFunction Function { $$ = make_ListFunction($2, $1); YY_RESULT_ListFunction_= $$; }
 ;
-ListStm : /* empty */ {  $$ = new ListStm(); YY_RESULT_ListStm_= $$; } 
-  | ListStm Stm {  $1->push_back($2) ; $$ = $1 ; YY_RESULT_ListStm_= $$; }
+ListStm : /* empty */ { $$ = 0; YY_RESULT_ListStm_= $$; } 
+  | ListStm Stm { $$ = make_ListStm($2, $1); YY_RESULT_ListStm_= $$; }
 ;
-ListDecl : /* empty */ {  $$ = new ListDecl(); YY_RESULT_ListDecl_= $$; } 
-  | Decl {  $$ = new ListDecl() ; $$->push_back($1); YY_RESULT_ListDecl_= $$; }
-  | Decl _SYMB_5 ListDecl {  $3->push_back($1) ; $$ = $3 ; YY_RESULT_ListDecl_= $$; }
+ListDecl : /* empty */ { $$ = 0; YY_RESULT_ListDecl_= $$; } 
+  | Decl { $$ = make_ListDecl($1, 0); YY_RESULT_ListDecl_= $$; }
+  | Decl _SYMB_5 ListDecl { $$ = make_ListDecl($1, $3); YY_RESULT_ListDecl_= $$; }
 ;
-ListIdent : _IDENT_ {  $$ = new ListIdent() ; $$->push_back($1); YY_RESULT_ListIdent_= $$; } 
-  | _IDENT_ _SYMB_5 ListIdent {  $3->push_back($1) ; $$ = $3 ; YY_RESULT_ListIdent_= $$; }
+ListIdent : _IDENT_ { $$ = make_ListIdent($1, 0); YY_RESULT_ListIdent_= $$; } 
+  | _IDENT_ _SYMB_5 ListIdent { $$ = make_ListIdent($1, $3); YY_RESULT_ListIdent_= $$; }
 ;
-Stm : Decl _SYMB_0 {  $$ = new SDecl($1); YY_RESULT_Stm_= $$; } 
-  | Exp _SYMB_0 {  $$ = new SExp($1); YY_RESULT_Stm_= $$; }
-  | _SYMB_3 ListStm _SYMB_4 {  $$ = new SBlock($2); YY_RESULT_Stm_= $$; }
-  | _SYMB_14 _SYMB_1 Exp _SYMB_2 Stm {  $$ = new SIf($3, $5); YY_RESULT_Stm_= $$; }
-  | _SYMB_14 _SYMB_1 Exp _SYMB_2 Stm _SYMB_12 Stm {  $$ = new SIfElse($3, $5, $7); YY_RESULT_Stm_= $$; }
-  | _SYMB_13 _SYMB_1 Exp _SYMB_0 Exp _SYMB_0 Exp _SYMB_2 Stm {  $$ = new SFor($3, $5, $7, $9); YY_RESULT_Stm_= $$; }
-  | _SYMB_17 _SYMB_1 Exp _SYMB_2 Stm {  $$ = new SWhile($3, $5); YY_RESULT_Stm_= $$; }
-  | _SYMB_16 Exp _SYMB_0 {  $$ = new SReturn($2); YY_RESULT_Stm_= $$; }
+Stm : Decl _SYMB_0 { $$ = make_SDecl($1); YY_RESULT_Stm_= $$; } 
+  | Exp _SYMB_0 { $$ = make_SExp($1); YY_RESULT_Stm_= $$; }
+  | _SYMB_3 ListStm _SYMB_4 { $$ = make_SBlock(reverseListStm($2)); YY_RESULT_Stm_= $$; }
+  | _SYMB_14 _SYMB_1 Exp _SYMB_2 Stm { $$ = make_SIf($3, $5); YY_RESULT_Stm_= $$; }
+  | _SYMB_14 _SYMB_1 Exp _SYMB_2 Stm _SYMB_12 Stm { $$ = make_SIfElse($3, $5, $7); YY_RESULT_Stm_= $$; }
+  | _SYMB_13 _SYMB_1 Exp _SYMB_0 Exp _SYMB_0 Exp _SYMB_2 Stm { $$ = make_SFor($3, $5, $7, $9); YY_RESULT_Stm_= $$; }
+  | _SYMB_17 _SYMB_1 Exp _SYMB_2 Stm { $$ = make_SWhile($3, $5); YY_RESULT_Stm_= $$; }
+  | _SYMB_16 Exp _SYMB_0 { $$ = make_SReturn($2); YY_RESULT_Stm_= $$; }
 ;
-Exp : _IDENT_ _SYMB_6 Exp {  $$ = new EAss($1, $3); YY_RESULT_Exp_= $$; } 
-  | Exp1 {  $$ = $1; YY_RESULT_Exp_= $$; }
+Exp : _IDENT_ _SYMB_6 Exp { $$ = make_EAss($1, $3); YY_RESULT_Exp_= $$; } 
+  | Exp1 { $$ = $1; YY_RESULT_Exp_= $$; }
 ;
-Exp1 : Exp2 _SYMB_7 Exp2 {  $$ = new ELt($1, $3); YY_RESULT_Exp_= $$; } 
-  | Exp2 {  $$ = $1; YY_RESULT_Exp_= $$; }
+Exp1 : Exp2 _SYMB_7 Exp2 { $$ = make_ELt($1, $3); YY_RESULT_Exp_= $$; } 
+  | Exp2 { $$ = $1; YY_RESULT_Exp_= $$; }
 ;
-Exp2 : Exp2 _SYMB_8 Exp3 {  $$ = new EAdd($1, $3); YY_RESULT_Exp_= $$; } 
-  | Exp2 _SYMB_9 Exp3 {  $$ = new ESub($1, $3); YY_RESULT_Exp_= $$; }
-  | Exp3 {  $$ = $1; YY_RESULT_Exp_= $$; }
+Exp2 : Exp2 _SYMB_8 Exp3 { $$ = make_EAdd($1, $3); YY_RESULT_Exp_= $$; } 
+  | Exp2 _SYMB_9 Exp3 { $$ = make_ESub($1, $3); YY_RESULT_Exp_= $$; }
+  | Exp3 { $$ = $1; YY_RESULT_Exp_= $$; }
 ;
-Exp3 : Exp3 _SYMB_10 Exp4 {  $$ = new EMul($1, $3); YY_RESULT_Exp_= $$; } 
-  | Exp4 {  $$ = $1; YY_RESULT_Exp_= $$; }
+Exp3 : Exp3 _SYMB_10 Exp4 { $$ = make_EMul($1, $3); YY_RESULT_Exp_= $$; } 
+  | Exp4 { $$ = $1; YY_RESULT_Exp_= $$; }
 ;
-Exp4 : _IDENT_ _SYMB_1 ListExp _SYMB_2 {  std::reverse($3->begin(),$3->end()) ;$$ = new Call($1, $3); YY_RESULT_Exp_= $$; } 
-  | _IDENT_ {  $$ = new EVar($1); YY_RESULT_Exp_= $$; }
-  | _STRING_ {  $$ = new EStr($1); YY_RESULT_Exp_= $$; }
-  | _INTEGER_ {  $$ = new EInt($1); YY_RESULT_Exp_= $$; }
-  | _DOUBLE_ {  $$ = new EDouble($1); YY_RESULT_Exp_= $$; }
-  | _SYMB_1 Exp _SYMB_2 {  $$ = $2; YY_RESULT_Exp_= $$; }
+Exp4 : _IDENT_ _SYMB_1 ListExp _SYMB_2 { $$ = make_Call($1, $3); YY_RESULT_Exp_= $$; } 
+  | _IDENT_ { $$ = make_EVar($1); YY_RESULT_Exp_= $$; }
+  | _STRING_ { $$ = make_EStr($1); YY_RESULT_Exp_= $$; }
+  | _INTEGER_ { $$ = make_EInt($1); YY_RESULT_Exp_= $$; }
+  | _DOUBLE_ { $$ = make_EDouble($1); YY_RESULT_Exp_= $$; }
+  | _SYMB_1 Exp _SYMB_2 { $$ = $2; YY_RESULT_Exp_= $$; }
 ;
-ListExp : /* empty */ {  $$ = new ListExp(); YY_RESULT_ListExp_= $$; } 
-  | Exp {  $$ = new ListExp() ; $$->push_back($1); YY_RESULT_ListExp_= $$; }
-  | Exp _SYMB_5 ListExp {  $3->push_back($1) ; $$ = $3 ; YY_RESULT_ListExp_= $$; }
+ListExp : /* empty */ { $$ = 0; YY_RESULT_ListExp_= $$; } 
+  | Exp { $$ = make_ListExp($1, 0); YY_RESULT_ListExp_= $$; }
+  | Exp _SYMB_5 ListExp { $$ = make_ListExp($1, $3); YY_RESULT_ListExp_= $$; }
 ;
-Type : _SYMB_15 {  $$ = new TInt(); YY_RESULT_Type_= $$; } 
-  | _SYMB_11 {  $$ = new TDouble(); YY_RESULT_Type_= $$; }
+Type : _SYMB_15 { $$ = make_TInt(); YY_RESULT_Type_= $$; } 
+  | _SYMB_11 { $$ = make_TDouble(); YY_RESULT_Type_= $$; }
 ;
 
