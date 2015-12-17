@@ -1,0 +1,8 @@
+int i;
+
+int main() {
+   i = 199;
+   putn(i);
+
+   return 0;
+}

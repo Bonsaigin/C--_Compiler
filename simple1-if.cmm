@@ -1,0 +1,27 @@
+//simple1-if.cmm
+//Input: None
+//Output: 2015
+int main ()
+{
+	int sum;
+	int i;
+	int sum2;
+	sum = 2014;
+	i = 3;
+	sum2 = 0;
+	if (i < 2) 
+	{
+		sum = sum + i;
+	}
+	else
+	{
+		sum = sum - i;
+	}
+	for(i = 0 ; i < 20; i = i + 1)
+	{
+		sum2 = sum2 + 1;
+	}
+	putn (sum);
+	putn (sum2);
+	return 0;
+}

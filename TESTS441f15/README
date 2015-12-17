@@ -1,0 +1,79 @@
+README
+
+An initial set of tests for the final project cs441 Fall 2015.
+The tests are in a tarball linked from the Web page.
+
+For testing the directory structure where you run your tests
+should be organized as follows:
+
+	test-cmm2pstack.sh
+	cmm2pstack  (or compiler)
+  	--- pstack
+	--- TESTS441f15
+
+It assumes that there is a subdirectory pstack, a compiler with name 
+"cmm2pstack" and a subdirectory TESTS441f15.
+So you will need to move "test-cmm2pstack.sh" shell script
+from TESTS441f15 (directory created after untarring TESTS44120151201-LAB.tar)
+to one level above that directory. Also,
+if your complier has a different name, e.g., "compiler",
+you need to change to that name the appropriate line
+in the shell script).
+
+Finally, your directory for testing should look as follows (see below).
+And you may also add your own myTests directory.
+With such structure
+chmod 755 test-cmm2pstack.sh
+./test-cmm2pstack.sh
+
+will run the tests in TESTS44f15 directory.
+If you wish to use a similar script for myTests,
+the script will need to be adjusted (directory name) and you will 
+need to add expected.err and expected.err files for each test.
+Those files should be prepared by hand based on truly expected behavior,
+and not by running your programs and saving the output (that would only
+test if you ran and save output correctly).
+
+
+├── cmm2pstack
+├── pstack
+│   ├── apd
+│   ├── api
+│   └── apm
+├── TESTS44120151201-LAB.tar
+├── TESTS441f15
+│   ├── calc_out.apm
+│   ├── code_out.apm
+│   ├── expected_parse.err
+│   ├── fib.cmm
+│   ├── fib.cmm_expected.err
+│   ├── fib.cmm_expected.out
+│   ├── fib-getnum.cmm
+│   ├── fib-noput.cmm
+│   ├── fib-noput.cmm_expected.err
+│   ├── fib-noput.cmm_expected.out
+│   ├── fib-recursive.cmm
+│   ├── fib-recursive.cmm_expected.err
+│   ├── fib-recursive.cmm_expected.out
+│   ├── log3.cmm
+│   ├── log3.cmm_expected.err
+│   ├── log3.cmm_expected.out
+│   ├── README
+│   ├── simple0.cmm
+│   ├── simple0.cmm_expected.err
+│   ├── simple0.cmm_expected.out
+│   ├── simple1.cmm
+│   ├── simple1.cmm_expected.err
+│   ├── simple1.cmm_expected.out
+│   ├── simple1-if.apd
+│   ├── simple1-if.cmm
+│   ├── simple1-if.cmm_expected.err
+│   ├── simple1-if.cmm_expected.out
+│   └── test-cmm2pstack.sh
+
+2 directories, 34 files
+
+Notes: api/apm/apd are included as a part of TESTS44120151201-LAB.tar
+as well as my (not necessarily complete wrt Milestone C) compiler 
+"cmm2pststack:, and they should be removed from that directory
+before testing.
