@@ -1,13 +1,16 @@
 USAGE:
-  # Build both the compiler and pstack:
+  # (Optional if not altering grammar) Generate new files
   bnfc -cpp cmm.cf
+
+  # Build both the compiler and pstack:
   make
 
   # Compile fib.cmm, producing fib.apm:
-  ./compiler fib.cmm fib.apm
+  ./cmm2pstack fib.cmm fib.apm
 
   # Disassemble fib.apm:
   ./pstack/apd fib
+
   # Execute fib.apm:
   ./pstack/api fib
 
@@ -17,9 +20,11 @@ BUILT-IN-FUNCTIONS:
   exit()      : ends the program immediately
   puts("...") : prints a string (only literal strings are supported)
   putn(num)   : prints an integer (like printf("\t%d\n", num))
+
+  We have included functionality to read numbers:
   getnum()    : gets a number from stdin
 
-Note that function calls are not checked for number and type of
+Note that function calls are not yet checked for number and type of
 arguments: giving the wrong number is likely to smash the stack.
 All functions return a value.
 
@@ -31,8 +36,8 @@ if and if-else
 simple for loop
 global variables
 
-Features NOT implemented include:
-optimization
+Planned features NOT yet implemented include:
+swap optimization
 scoped for loop
 function argument count checking
 doubles and type checking
