@@ -1,5 +1,6 @@
 USAGE:
   # Build both the compiler and pstack:
+  bnfc -cpp cmm.cf
   make
 
   # Compile fib.cmm, producing fib.apm:
@@ -36,7 +37,7 @@ scoped for loop
 function argument count checking
 doubles and type checking
 
-NOTE TO PROFESSOR: This project was done together by David Jones
+NOTE: The beginning of this project was done together by David Jones
 and Ian Gibson. The work was divided evenly. David wrote SIf and
 SFor, Ian wrote getnum() and SIfElse. The implementation of global
 variables was a joint effort. The decisions and construction of
