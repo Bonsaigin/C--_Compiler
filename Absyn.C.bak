@@ -770,6 +770,150 @@ EEq *EEq::clone() const
 
 
 
+/********************   ENeq    ********************/
+ENeq::ENeq(Exp *p1, Exp *p2)
+{
+  exp_1 = p1;
+  exp_2 = p2;
+
+}
+
+ENeq::ENeq(const ENeq & other)
+{
+  exp_1 = other.exp_1->clone();
+  exp_2 = other.exp_2->clone();
+
+}
+
+ENeq &ENeq::operator=(const ENeq & other)
+{
+  ENeq tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ENeq::swap(ENeq & other)
+{
+  std::swap(exp_1, other.exp_1);
+  std::swap(exp_2, other.exp_2);
+
+}
+
+ENeq::~ENeq()
+{
+  delete(exp_1);
+  delete(exp_2);
+
+}
+
+void ENeq::accept(Visitor *v)
+{
+  v->visitENeq(this);
+}
+
+ENeq *ENeq::clone() const
+{
+  return new ENeq(*this);
+}
+
+
+
+/********************   EGeq    ********************/
+EGeq::EGeq(Exp *p1, Exp *p2)
+{
+  exp_1 = p1;
+  exp_2 = p2;
+
+}
+
+EGeq::EGeq(const EGeq & other)
+{
+  exp_1 = other.exp_1->clone();
+  exp_2 = other.exp_2->clone();
+
+}
+
+EGeq &EGeq::operator=(const EGeq & other)
+{
+  EGeq tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void EGeq::swap(EGeq & other)
+{
+  std::swap(exp_1, other.exp_1);
+  std::swap(exp_2, other.exp_2);
+
+}
+
+EGeq::~EGeq()
+{
+  delete(exp_1);
+  delete(exp_2);
+
+}
+
+void EGeq::accept(Visitor *v)
+{
+  v->visitEGeq(this);
+}
+
+EGeq *EGeq::clone() const
+{
+  return new EGeq(*this);
+}
+
+
+
+/********************   ELeq    ********************/
+ELeq::ELeq(Exp *p1, Exp *p2)
+{
+  exp_1 = p1;
+  exp_2 = p2;
+
+}
+
+ELeq::ELeq(const ELeq & other)
+{
+  exp_1 = other.exp_1->clone();
+  exp_2 = other.exp_2->clone();
+
+}
+
+ELeq &ELeq::operator=(const ELeq & other)
+{
+  ELeq tmp(other);
+  swap(tmp);
+  return *this;
+}
+
+void ELeq::swap(ELeq & other)
+{
+  std::swap(exp_1, other.exp_1);
+  std::swap(exp_2, other.exp_2);
+
+}
+
+ELeq::~ELeq()
+{
+  delete(exp_1);
+  delete(exp_2);
+
+}
+
+void ELeq::accept(Visitor *v)
+{
+  v->visitELeq(this);
+}
+
+ELeq *ELeq::clone() const
+{
+  return new ELeq(*this);
+}
+
+
+
 /********************   EAdd    ********************/
 EAdd::EAdd(Exp *p1, Exp *p2)
 {

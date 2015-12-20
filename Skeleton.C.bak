@@ -159,6 +159,33 @@ void Skeleton::visitEEq(EEq *eeq)
 
 }
 
+void Skeleton::visitENeq(ENeq *eneq)
+{
+  /* Code For ENeq Goes Here */
+
+  eneq->exp_1->accept(this);
+  eneq->exp_2->accept(this);
+
+}
+
+void Skeleton::visitEGeq(EGeq *egeq)
+{
+  /* Code For EGeq Goes Here */
+
+  egeq->exp_1->accept(this);
+  egeq->exp_2->accept(this);
+
+}
+
+void Skeleton::visitELeq(ELeq *eleq)
+{
+  /* Code For ELeq Goes Here */
+
+  eleq->exp_1->accept(this);
+  eleq->exp_2->accept(this);
+
+}
+
 void Skeleton::visitEAdd(EAdd *eadd)
 {
   /* Code For EAdd Goes Here */

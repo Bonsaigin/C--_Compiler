@@ -83,6 +83,12 @@ public:
     // Expressions
     void visitEAss(EAss *p);
     void visitELt(ELt *p);
+    void visitEGt(EGt *p);
+    void visitEEq(EEq *p);
+    //void visitENeq(ENeq *p);
+    //void visitEGeq(EGeq *p);
+    //void visitELeq(ELeq *p);
+
     void visitEAdd(EAdd *p);
     void visitESub(ESub *p);
     void visitEMul(EMul *p);

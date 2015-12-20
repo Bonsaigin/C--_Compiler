@@ -228,6 +228,31 @@ void CodeGen::visitELt(ELt *elt)
     code.add(I_LESS);
 }
 
+void CodeGen::visitEGt(EGt *egt)
+{
+    egt->exp_1->accept(this);
+    egt->exp_2->accept(this);
+    code.add(I_GREATER);
+}
+
+void CodeGen::visitEEq(EEq *eeq)
+{
+    eeq->exp_1->accept(this);
+    eeq->exp_2->accept(this);
+    code.add(I_EQUAL);
+}
+
+/* figure this out later
+void CodeGen::visitENeq(ENeq *eneq)
+{
+    eneq->exp_1->accept(this);
+    eneq->exp_2->accept(this);
+    code.add(I_EQUAL);
+    //push that value onto the stack
+    code.add(NOT);
+}
+*/
+
 void CodeGen::visitEAdd(EAdd *eadd)
 {
     eadd->exp_1->accept(this);

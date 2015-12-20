@@ -379,6 +379,48 @@ void PrintAbsyn::visitEEq(EEq* p)
   _i_ = oldi;
 }
 
+void PrintAbsyn::visitENeq(ENeq* p)
+{
+  int oldi = _i_;
+  if (oldi > 1) render(_L_PAREN);
+
+  _i_ = 2; p->exp_1->accept(this);
+  render("!=");
+  _i_ = 2; p->exp_2->accept(this);
+
+  if (oldi > 1) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitEGeq(EGeq* p)
+{
+  int oldi = _i_;
+  if (oldi > 1) render(_L_PAREN);
+
+  _i_ = 2; p->exp_1->accept(this);
+  render(">=");
+  _i_ = 2; p->exp_2->accept(this);
+
+  if (oldi > 1) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
+void PrintAbsyn::visitELeq(ELeq* p)
+{
+  int oldi = _i_;
+  if (oldi > 1) render(_L_PAREN);
+
+  _i_ = 2; p->exp_1->accept(this);
+  render("<=");
+  _i_ = 2; p->exp_2->accept(this);
+
+  if (oldi > 1) render(_R_PAREN);
+
+  _i_ = oldi;
+}
+
 void PrintAbsyn::visitEAdd(EAdd* p)
 {
   int oldi = _i_;
@@ -803,6 +845,36 @@ void ShowAbsyn::visitEEq(EEq* p)
 {
   bufAppend('(');
   bufAppend("EEq");
+  bufAppend(' ');
+  p->exp_1->accept(this);
+  bufAppend(' ');
+  p->exp_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitENeq(ENeq* p)
+{
+  bufAppend('(');
+  bufAppend("ENeq");
+  bufAppend(' ');
+  p->exp_1->accept(this);
+  bufAppend(' ');
+  p->exp_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitEGeq(EGeq* p)
+{
+  bufAppend('(');
+  bufAppend("EGeq");
+  bufAppend(' ');
+  p->exp_1->accept(this);
+  bufAppend(' ');
+  p->exp_2->accept(this);
+  bufAppend(')');
+}
+void ShowAbsyn::visitELeq(ELeq* p)
+{
+  bufAppend('(');
+  bufAppend("ELeq");
   bufAppend(' ');
   p->exp_1->accept(this);
   bufAppend(' ');

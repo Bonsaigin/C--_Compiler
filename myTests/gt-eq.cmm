@@ -1,0 +1,13 @@
+int main() {
+    int i;
+    for(i = 0; i < 10; i = i+1) {
+        if(i == 4) {
+            puts("I found 4");
+        }
+        if(i > 8) {
+            puts("Greater than is working!");
+        }
+        putn(i);
+    }
+    return 0;
+}

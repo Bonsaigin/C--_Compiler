@@ -41,6 +41,9 @@ class EAss;
 class ELt;
 class EGt;
 class EEq;
+class ENeq;
+class EGeq;
+class ELeq;
 class EAdd;
 class ESub;
 class EMul;
@@ -85,6 +88,9 @@ public:
   virtual void visitELt(ELt *p) = 0;
   virtual void visitEGt(EGt *p) = 0;
   virtual void visitEEq(EEq *p) = 0;
+  virtual void visitENeq(ENeq *p) = 0;
+  virtual void visitEGeq(EGeq *p) = 0;
+  virtual void visitELeq(ELeq *p) = 0;
   virtual void visitEAdd(EAdd *p) = 0;
   virtual void visitESub(ESub *p) = 0;
   virtual void visitEMul(EMul *p) = 0;
@@ -403,6 +409,51 @@ public:
   virtual void accept(Visitor *v);
   virtual EEq *clone() const;
   void swap(EEq &);
+};
+
+class ENeq : public Exp
+{
+public:
+  Exp *exp_1;
+  Exp *exp_2;
+
+  ENeq(const ENeq &);
+  ENeq &operator=(const ENeq &);
+  ENeq(Exp *p1, Exp *p2);
+  ~ENeq();
+  virtual void accept(Visitor *v);
+  virtual ENeq *clone() const;
+  void swap(ENeq &);
+};
+
+class EGeq : public Exp
+{
+public:
+  Exp *exp_1;
+  Exp *exp_2;
+
+  EGeq(const EGeq &);
+  EGeq &operator=(const EGeq &);
+  EGeq(Exp *p1, Exp *p2);
+  ~EGeq();
+  virtual void accept(Visitor *v);
+  virtual EGeq *clone() const;
+  void swap(EGeq &);
+};
+
+class ELeq : public Exp
+{
+public:
+  Exp *exp_1;
+  Exp *exp_2;
+
+  ELeq(const ELeq &);
+  ELeq &operator=(const ELeq &);
+  ELeq(Exp *p1, Exp *p2);
+  ~ELeq();
+  virtual void accept(Visitor *v);
+  virtual ELeq *clone() const;
+  void swap(ELeq &);
 };
 
 class EAdd : public Exp
