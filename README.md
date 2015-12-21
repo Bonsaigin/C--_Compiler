@@ -10,7 +10,7 @@ The purpose of this project is to extend the C-- language to include new feature
 > bnfc -cpp cmm.cf
 
 - Build both the compiler and pstack:
-> make
+> make -f Makefile.codegen
 
 - Compile fib.cmm, producing fib.apm:
 > ./cmm2pstack fib.cmm fib.apm

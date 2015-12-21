@@ -55,7 +55,7 @@ public:
     // visitProgram, visitTInt or visitTDouble rather than visitType, etc.)
     void visitProgram(Program *) {}
     void visitFunction(Function *) {}
-    void visitGlobal(Global *) {}
+    void visitGlobal(Global * p);
     void visitDecl(Decl *) {}
     void visitStm(Stm *) {}
     void visitExp(Exp *) {}
